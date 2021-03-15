@@ -4,9 +4,7 @@
 
 void initial_board(char board[BOARD_SIZE][BOARD_SIZE])
 {
-    for (size_t rows = 0; rows < sizeof(*board); rows++)
-        for (size_t column = 0; column < sizeof(board[rows]); column++)
-            board[rows][column] = '-';
+    memset(board, '-', BOARD_SIZE*BOARD_SIZE);
 }
 
 int check_input(int input, int scanf_s_output)
@@ -23,11 +21,11 @@ char check_winning_rows(const char board[BOARD_SIZE][BOARD_SIZE])
 {
     int o_nums = 0;
     int x_nums = 0;
-    for (size_t rows = 0; rows < sizeof(*board); rows++)
+    for (size_t rows = 0; rows < BOARD_SIZE; rows++)
     {
         o_nums = 0;
         x_nums = 0;
-        for (size_t colums = 0; colums < sizeof(board[rows]); colums++)
+        for (size_t colums = 0; colums < BOARD_SIZE; colums++)
         {
             if (board[rows][colums] == 'X')
                 x_nums += 1;
@@ -47,11 +45,11 @@ char check_winning_columns(const char board[BOARD_SIZE][BOARD_SIZE])
 {
     int o_nums = 0;
     int x_nums = 0;
-    for (size_t i = 0; i < sizeof(*board); i++)
+    for (size_t i = 0; i < BOARD_SIZE; i++)
     {
         o_nums = 0;
         x_nums = 0;
-        for (size_t j = 0; j < sizeof(board[i]); j++)
+        for (size_t j = 0; j < BOARD_SIZE; j++)
         {
             if (board[j][i] == 'X')
                 x_nums += 1;
@@ -72,7 +70,7 @@ char check_winning_digonals(const char board[BOARD_SIZE][BOARD_SIZE])
     int o_nums = 0;
     int x_nums = 0;
     // Check digonal top right to butt left.
-    for (size_t i = 0; i < sizeof(*board); i++)
+    for (size_t i = 0; i < BOARD_SIZE; i++)
     {
         if (board[i][i] == 'X')
             x_nums += 1;
@@ -87,11 +85,11 @@ char check_winning_digonals(const char board[BOARD_SIZE][BOARD_SIZE])
     o_nums = 0;
     x_nums = 0;
     // Check digonal top left to butt right.
-    for (size_t i = 0; i < sizeof(*board); i++)
+    for (size_t i = 0; i < BOARD_SIZE; i++)
     {
-        if (board[i][sizeof(*board) - (i + 1)] == 'X')
+        if (board[i][BOARD_SIZE - (i + 1)] == 'X')
             x_nums += 1;
-        else if (board[i][sizeof(*board) - (i + 1)] == 'O')
+        else if (board[i][BOARD_SIZE - (i + 1)] == 'O')
             o_nums += 1;
     }
     if (x_nums == WINNING_SIZE)
@@ -153,10 +151,10 @@ void print_board(const char board[BOARD_SIZE][BOARD_SIZE]) {
         printf("  %d  ", i);
     printf("\n  ---------------\n");
 
-    for (int i = 0; i < sizeof(*board); i++)
+    for (int i = 0; i < BOARD_SIZE; i++)
     {
         printf("%d ", i);
-        for (int j = 0; j < sizeof(board[i]); j++)
+        for (int j = 0; j < BOARD_SIZE; j++)
             printf("| %c |", board[i][j]);
         printf("\n  ---------------\n");
     }

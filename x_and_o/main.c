@@ -14,7 +14,7 @@ int main() {
         player_turn(board, player);
         print_board(board);
         printf("\n\n\n");
-        if (i >= (BOARD_SIZE * 2) - 3)
+        if (i >= BOARD_SIZE)
         {
             char player_won = check_winning(board);
             if (player_won != '-') {
